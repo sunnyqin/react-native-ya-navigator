@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { View, ViewPropTypes } from 'react-native';
 import { Navigator } from 'react-native-deprecated-custom-components';
+import { TRANSPARENT_PADDING_TOP } from './NavBar'
 
 export default class Scene extends React.Component {
   componentDidUpdate() {
@@ -119,7 +120,7 @@ export default class Scene extends React.Component {
           {
             flex: 1,
             paddingBottom: this.props.paddingBottom ?
-              Scene.navBarHeight :
+              Scene.navBarHeight - TRANSPARENT_PADDING_TOP :
               0,
           },
           this.props.style,

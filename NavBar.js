@@ -26,7 +26,7 @@ const NAVBAR_LANDSCAPE_HEIGHT_ANDROID = 40;
 const DEFAULT_IOS_BACK_ICON = 'ios-arrow-back';
 const DEFAULT_ANDROID_BACK_ICON = 'md-arrow-back';
 const PADDING_HORIZONTAL = 0;
-const TRANSPARENT_PADDING_TOP = 7;
+export const TRANSPARENT_PADDING_TOP = 7;
 const NAV_BAR_BUTTON_WIDTH = 80;
 
 export default class NavBar extends React.Component {
