@@ -17,7 +17,7 @@ import {
 const IS_IOS = Platform.OS === 'ios';
 
 const NAV_BAR_STYLES = Navigator.NavigationBar.Styles;
-const NAV_BAR_DEFAULT_BACKGROUND_COLOR = 'white';
+const NAV_BAR_DEFAULT_BACKGROUND_COLOR = 'transparent';
 const NAV_BAR_DEFAULT_TINT_COLOR = 'black';
 const NAV_HEIGHT = NAV_BAR_STYLES.General.TotalNavHeight;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -260,6 +260,7 @@ export default class NavBar extends React.Component {
     }
 
     let underlay = this.props.underlay;
+    console.log('underlay', underlay);
 
     underlay = (
       <View style={{
@@ -643,6 +644,7 @@ export default class NavBar extends React.Component {
             styles.layer,
             fixedHeight ? { marginTop: 0 } : null,
             paddingHorizontal ? { paddingHorizontal } : null,
+            {borderTopColor: this.props.underlay.borderTopColor}
           ]}
           pointerEvents={'box-none'}
         >
@@ -724,6 +726,7 @@ export default class NavBar extends React.Component {
             styles.layer,
             fixedHeight ? { marginTop: 0 } : null,
             paddingHorizontal ? { paddingHorizontal } : null,
+        	{borderTopColor: this.props.underlay.borderTopColor}
           ]}
           pointerEvents={'box-none'}
         >
@@ -792,6 +795,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     flexDirection: 'row',
+    backgroundColor: 'transparent'
   },
   layer: {
     position: 'absolute',
@@ -804,6 +808,8 @@ const styles = StyleSheet.create({
       0,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    backgroundColor: 'transparent',
+    borderTopWidth: 1
   },
   animatedWrapper: {
     flex: 1,
