@@ -118,7 +118,7 @@ export default class Scene extends React.Component {
         style={[
           {
             flex: 1,
-            paddingTop: this.props.paddingTop ?
+            paddingBottom: this.props.paddingBottom ?
               Scene.navBarHeight :
               0,
           },
@@ -131,7 +131,7 @@ export default class Scene extends React.Component {
 
   static propTypes = {
     style: ViewPropTypes.style,
-    paddingTop: PropTypes.bool,
+    paddingBottom: PropTypes.bool,
     delegate: (props, propName) => {
       if (props[propName] && !(props[propName] instanceof React.Component)) {
         return new Error('Scene delegate should be instance of React.Component');
@@ -140,7 +140,7 @@ export default class Scene extends React.Component {
   };
 
   static defaultProps = {
-    paddingTop: true,
+    paddingBottom: true,
   };
 
   static navBarHeight = Navigator.NavigationBar.Styles.General.TotalNavHeight;

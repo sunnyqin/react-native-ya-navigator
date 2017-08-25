@@ -25,7 +25,9 @@ const NAVBAR_LANDSCAPE_HEIGHT_IOS = 32;
 const NAVBAR_LANDSCAPE_HEIGHT_ANDROID = 40;
 const DEFAULT_IOS_BACK_ICON = 'ios-arrow-back';
 const DEFAULT_ANDROID_BACK_ICON = 'md-arrow-back';
-const PADDING_HORIZONTAL = 10;
+const PADDING_HORIZONTAL = 0;
+const TRANSPARENT_PADDING_TOP = 7;
+const NAV_BAR_BUTTON_WIDTH = 80;
 
 export default class NavBar extends React.Component {
   static propTypes = {
@@ -259,20 +261,16 @@ export default class NavBar extends React.Component {
 
     let underlay = this.props.underlay;
 
-    if (React.isValidElement(underlay)) {
-      underlay = React.cloneElement(underlay, {
-        style: {
-          ...underlay.props.style,
+    underlay = (
+      <View style={{
+          ...underlay,
           position: 'absolute',
           left: 0,
           right: 0,
-          top: 0,
-          bottom: 0,
-        },
-      });
-    } else {
-      underlay = null;
-    }
+          top: TRANSPARENT_PADDING_TOP,
+          bottom: 0
+        }} />
+    )
 
     const paddingHorizontal = (style && style.paddingHorizontal) || 0;
 
@@ -620,7 +618,6 @@ export default class NavBar extends React.Component {
         style={[
           style,
           styles.navBar,
-          navBarBackgroundColorStyle,
           {
             height: !fixedHeight ? navBarHeight : fixedHeight,
             opacity: isGoingBack && prevRoute.component &&
@@ -641,7 +638,6 @@ export default class NavBar extends React.Component {
       >
 
         {navBarBackgroundColor !== 'transparent' ? underlay : null}
-
         <View // PREV LAYER
           style={[
             styles.layer,
@@ -650,7 +646,6 @@ export default class NavBar extends React.Component {
           ]}
           pointerEvents={'box-none'}
         >
-          {(crossPlatformUI || IS_IOS) && prevTitlePart}
           {prevLeftPart || prevBackBtn ?
             <View
               style={styles.leftPartContainer}
@@ -689,7 +684,6 @@ export default class NavBar extends React.Component {
             </View> :
             <View />
           }
-          {!(crossPlatformUI || IS_IOS) && prevTitlePart}
           {prevRightPart ?
             <View
               style={styles.rightPartContainer}
@@ -725,7 +719,6 @@ export default class NavBar extends React.Component {
           null
          }
         </View>
-
         <View // LAYER
           style={[
             styles.layer,
@@ -734,7 +727,6 @@ export default class NavBar extends React.Component {
           ]}
           pointerEvents={'box-none'}
         >
-          {(crossPlatformUI || IS_IOS) && titlePart}
           {(leftPart && animationFromIndex !== animationToIndex) || backBtn ?
             <View
               style={styles.leftPartContainer}
@@ -762,7 +754,6 @@ export default class NavBar extends React.Component {
             </View> :
             <View />
           }
-          {!(crossPlatformUI || IS_IOS) && titlePart}
           {rightPart && animationFromIndex !== animationToIndex ?
             <View
               style={styles.rightPartContainer}
@@ -787,6 +778,8 @@ export default class NavBar extends React.Component {
             null
           }
         </View>
+        {!(crossPlatformUI || IS_IOS) && prevTitlePart}
+        {(crossPlatformUI || IS_IOS) && titlePart}
       </Animated.View>
     );
   }
@@ -796,7 +789,7 @@ const styles = StyleSheet.create({
   navBar: {
     position: 'absolute',
     left: 0,
-    top: 0,
+    bottom: 0,
     right: 0,
     flexDirection: 'row',
   },
@@ -804,7 +797,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    top: 0,
+    top: TRANSPARENT_PADDING_TOP,
     bottom: 0,
     marginTop: getOrientation() === 'PORTRAIT' ?
       NAV_BAR_STYLES.General.StatusBarHeight :
@@ -815,21 +808,24 @@ const styles = StyleSheet.create({
   animatedWrapper: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent'
   },
   leftPartContainer: {
     paddingLeft: PADDING_HORIZONTAL,
   },
   titlePart_ios: {
     position: 'absolute',
-    left: 0,
-    right: 0,
+    left: NAV_BAR_BUTTON_WIDTH,
+    right: NAV_BAR_BUTTON_WIDTH,
     top: 0,
     bottom: 0,
   },
   titlePart_android: {
-    flex: 1,
-    paddingLeft: 10,
+    position: 'absolute',
+    left: NAV_BAR_BUTTON_WIDTH,
+    right: NAV_BAR_BUTTON_WIDTH,
+    top: 0,
+    bottom: 0,
   },
   rightPartContainer: {
     paddingRight: PADDING_HORIZONTAL,
