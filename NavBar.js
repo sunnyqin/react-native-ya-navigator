@@ -781,8 +781,8 @@ export default class NavBar extends React.Component {
             null
           }
         </View>
-        {!(crossPlatformUI || IS_IOS) && prevTitlePart}
-        {(crossPlatformUI || IS_IOS) && titlePart}
+		{!(crossPlatformUI || IS_IOS) && prevTitlePart}
+        {!(crossPlatformUI || IS_IOS) && titlePart}
       </Animated.View>
     );
   }
