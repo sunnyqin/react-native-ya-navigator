@@ -54,7 +54,7 @@ export default class NavBar extends React.Component {
       animationFromIndex: 0,
       animationToIndex: 0,
       navBarOpacity: new Animated.Value(props.isHiddenOnInit ? 0 : 1),
-      navBarYPos: new Animated.Value(props.isHiddenOnInit ? -NAV_HEIGHT : 0),
+      navBarYPos: new Animated.Value(props.isHiddenOnInit ? NAV_HEIGHT : 0),
       navBarWidth: SCREEN_WIDTH,
       navBarHeight: getOrientation() === 'PORTRAIT' ? NAV_HEIGHT :
         (IS_IOS ? NAVBAR_LANDSCAPE_HEIGHT_IOS : NAVBAR_LANDSCAPE_HEIGHT_ANDROID),
@@ -123,7 +123,7 @@ export default class NavBar extends React.Component {
       animationFromIndex: 0,
       animationToIndex: 0,
       navBarOpacity: new Animated.Value(this.props.isHiddenOnInit ? 0 : 1),
-      navBarYPos: new Animated.Value(this.props.isHiddenOnInit ? -NAV_HEIGHT : 0),
+      navBarYPos: new Animated.Value(this.props.isHiddenOnInit ? NAV_HEIGHT : 0),
       prevLeftPartWidth: null,
       leftPartWidth: 0,
       prevRightPartWidth: null,
@@ -158,11 +158,11 @@ export default class NavBar extends React.Component {
         toValue: 0,
         duration: 200,
       }).start(() => {
-        this.state.navBarYPos.setValue(-NAV_HEIGHT);
+        this.state.navBarYPos.setValue(NAV_HEIGHT);
       });
     } else if (type === 'slide') {
       Animated.timing(this.state.navBarYPos, {
-        toValue: -NAV_HEIGHT,
+        toValue: NAV_HEIGHT,
         duration: 100,
       }).start(() => {
         this.state.navBarOpacity.setValue(0);
